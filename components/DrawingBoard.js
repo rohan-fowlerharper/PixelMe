@@ -1,9 +1,9 @@
-import { Box, SimpleGrid } from '@chakra-ui/react'
+import { SimpleGrid } from '@chakra-ui/react'
 import { useState } from 'react'
 import Pixel from './Pixel'
 
 const DrawingBoard = ({ currentColor, width, height }) => {
-  // create board of pixel components using width and height from props
+
   const pixelSize = 20
   const [board, setBoard] = useState(
     Array(height)

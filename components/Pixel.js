@@ -4,8 +4,10 @@ import { useState } from 'react'
 const Pixel = (props) => {
   const { currentColor, size } = props
 
-  const [pixelColor, setPixelColor] = useState('transparent')
-  const [prevColor, setPrevColor] = useState('transparent')
+  const tsp = 'transparent'
+
+  const [pixelColor, setPixelColor] = useState(tsp)
+  const [prevColor, setPrevColor] = useState(tsp)
 
   function applyColor (evt) {
     setPrevColor(currentColor)
@@ -21,13 +23,13 @@ const Pixel = (props) => {
 
   function colorToWhite (evt) {
     evt.preventDefault()
-    setPrevColor('transparent')
+    setPrevColor(tsp)
   }
 
   function colorToWhite (evt) {
     evt.preventDefault()
-    setPixelColor('transparent')
-    setPrevColor('transparent')
+    setPixelColor(tsp)
+    setPrevColor(tsp)
   }
 
   return (

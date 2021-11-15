@@ -13,9 +13,11 @@ const Editor = () => {
 
   return (
     <Flex >
+      {/* TODO: colors from props of image */}
       <SwatchesPicker color={color} onChangeComplete={handleChangeComplete} height='500' />
       <Spacer />
       <DrawingBoard currentColor={color} width={20} height={20} />
+      {/* TODO: add export to png and export to template buttons */}
       <Spacer />
     </Flex>
   )
