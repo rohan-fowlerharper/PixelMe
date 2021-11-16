@@ -3,9 +3,11 @@ const initialState = '#FFFFFF'
 function selectedColor (state = initialState, action) {
   switch (action.type) {
     case 'SET_COLOR':
-      // TODO {color} : color (hex)
-      return state
+      console.log('SET_COLOR', action.color)
+      return action.color
     default:
       return state
   }
 }
+
+export default selectedColor

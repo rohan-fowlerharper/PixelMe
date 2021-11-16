@@ -2,15 +2,32 @@ const initialState = []
 
 function board (state = initialState, action) {
   switch (action.type) {
-    case 'UPDATE_PIXEL_COLOR':
-      // TODO {pixelId, previousColor, newColor} - previous color for undo? : [Array<Pixel>]
-      return state
+    case 'SET_PIXEL_COLOR':
+      return state.map(row => {
+        return row.map(pixel => {
+          if (pixel.id === action.id) {
+            return {
+              ...pixel,
+              color: action.color
+            }
+          }
+          return pixel
+        })
+      })
     case 'CREATE_EMPTY_BOARD':
-      // TODO {width, height, initial color} : []
-      return state
+      return Array(action.height).fill().map((_, rowIdx) => {
+        return Array(action.width).fill().map((_, colIdx) => {
+          return {
+            id: `${rowIdx}-${colIdx}`,
+            color: action.initialColor
+          }
+        })
+      })
     case 'CREATE_BOARD_FROM_TEMPLATE':
-      // TODO {existingBoard, width, height}
+    // TODO {existingBoard, width, height}
     default:
       return state
   }
 }
+
+export default board

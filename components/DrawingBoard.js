@@ -1,15 +1,17 @@
 import { SimpleGrid } from '@chakra-ui/react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Pixel from './Pixel'
+import { useSelector, useDispatch } from 'react-redux'
 
-const DrawingBoard = ({ currentColor, width, height }) => {
+const DrawingBoard = ({ width, height }) => {
+  const board = useSelector(state => state.board)
+  const dispatch = useDispatch()
 
-  const pixelSize = 20
-  const [board, setBoard] = useState(
-    Array(height)
-      .fill(0)
-      .map(() => Array(width).fill(0))
-  )
+  const pixelSize = 50
+  
+  useEffect(() => {
+    dispatch({ type: 'CREATE_EMPTY_BOARD', width, height, initialColor: '#ffffff' })
+  }, [dispatch, height, width])
 
   return (
     <SimpleGrid
@@ -20,12 +22,12 @@ const DrawingBoard = ({ currentColor, width, height }) => {
       height={height*(pixelSize + 1)}
       p="1px"
     >
-      {board.map((row, rowIndex) => (
-          row.map((pixel, pixelIndex) => (
+      {board.map((row) => (
+          row.map((pixel) => (
             <Pixel
-              key={pixelIndex}
-              pixelColor={pixel}
-              currentColor={currentColor}
+              key={pixel.id}
+              id={pixel.id}
+              pixelColor={pixel.color}
               size={pixelSize}
             />
           ))

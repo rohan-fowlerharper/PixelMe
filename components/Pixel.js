@@ -1,35 +1,31 @@
 import { Box } from '@chakra-ui/react'
 import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
-const Pixel = (props) => {
-  const { currentColor, size } = props
-
-  const tsp = 'transparent'
-
-  const [pixelColor, setPixelColor] = useState(tsp)
-  const [prevColor, setPrevColor] = useState(tsp)
+const Pixel = ({ pixelColor, size, id }) => {
+  const dispatch = useDispatch()
+  const selectedColor = useSelector(state => state.selectedColor)
+  
+  const [isHover, setIsHover] = useState(false)
 
   function applyColor (evt) {
-    setPrevColor(currentColor)
+    const action = {
+      type: 'SET_PIXEL_COLOR',
+      id: id,
+      color: selectedColor
+    }
+    dispatch(action)
+    setIsHover(false)
   }
 
-  function revertColor (evt) {
-    setPixelColor(prevColor)
-  }
-
-  function hoverColor (evt) {
-    setPixelColor(currentColor)
-  }
-
-  function colorToWhite (evt) {
+  function applyWhite (evt) {
     evt.preventDefault()
-    setPrevColor(tsp)
-  }
-
-  function colorToWhite (evt) {
-    evt.preventDefault()
-    setPixelColor(tsp)
-    setPrevColor(tsp)
+    const action = {
+      type: 'SET_PIXEL_COLOR',
+      id: id,
+      color: 'white'
+    }
+    dispatch(action)
   }
 
   return (
@@ -37,11 +33,11 @@ const Pixel = (props) => {
       className="pixel"
       width={`${size}px`}
       height={`${size}px`}
-      backgroundColor={pixelColor}
-      onMouseEnter={hoverColor}
-      onMouseLeave={revertColor}
+      backgroundColor={isHover ? selectedColor : pixelColor}
+      onMouseEnter={() => setIsHover(true)}
+      onMouseLeave={() => setIsHover(false)}
       onClick={applyColor}
-      onContextMenu={colorToWhite}
+      onContextMenu={applyWhite}
     />
   )
 }
