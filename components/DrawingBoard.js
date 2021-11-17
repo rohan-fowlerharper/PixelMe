@@ -1,5 +1,5 @@
 import { SimpleGrid } from '@chakra-ui/react'
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import Pixel from './Pixel'
 import { useSelector, useDispatch } from 'react-redux'
 
