@@ -3,6 +3,8 @@ import { useEffect } from 'react'
 import Pixel from './Pixel'
 import { useSelector, useDispatch } from 'react-redux'
 
+// TODO: add click handling here instead of in Pixel const [clicked, setClicked] = useState(false) const [rClick, setRClick] = useState(false)
+
 const DrawingBoard = ({ width, height, template }) => {
   const board = useSelector(state => state.board)
   const dispatch = useDispatch()
