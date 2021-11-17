@@ -6,7 +6,7 @@ import NavBar from '../components/NavBar'
 export default function Home() {
   return (
     <>
-    {/* TODO: add home screen/dashboard screen */}
+    {/* TODO: add simple navigation to new and from template pages */}
       <div>Hello </div>
     </>
   )
