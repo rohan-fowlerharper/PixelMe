@@ -28,16 +28,32 @@ const Pixel = ({ pixelColor, baseColor, size, id }) => {
     dispatch(action)
   }
 
+  function handleHover (evt) {
+    evt.preventDefault()
+    if (evt.buttons === 1) {
+      applyColor(evt)
+    } else if (evt.buttons === 2) {
+      removeColor(evt)
+    }
+    setIsHover(true)
+  }
+
   return (
     <Box
       className="pixel"
       width={`${size}px`}
       height={`${size}px`}
       backgroundColor={isHover ? selectedColor : pixelColor ? pixelColor : baseColor}
-      onMouseEnter={() => setIsHover(true)}
+      onMouseEnter={(evt) => {
+        // check if mouse1 is pressed
+        if (evt.buttons === 1) {
+          applyColor(evt)
+        } else if (evt.buttons === 2) {
+          removeColor(evt)
+        }
+        setIsHover(true)
+      }}
       onMouseLeave={() => setIsHover(false)}
-      onClick={applyColor}
-      onContextMenu={removeColor}
     />
   )
 }
