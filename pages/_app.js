@@ -6,7 +6,7 @@ import {
 import theme from '../components/theme'
 import NavBar from '../components/NavBar'
 import { Provider } from 'react-redux'
-import store from '../store'
+import store from '../redux/store'
 
 function MyApp ({ Component, pageProps }) {
   return (
