@@ -5,10 +5,9 @@ import { Flex, Spacer } from '@chakra-ui/react'
 import { useDispatch } from 'react-redux'
 
 const Editor = ({ template }) => {
-  const firstColor = SwatchesPicker.defaultProps.colors[0][0]
+  const firstColor = template ? Object.values(template.pallete)[0] : SwatchesPicker.defaultProps.colors[0][0]
   const [color, setColor] = useState(firstColor)
   const dispatch = useDispatch()
-  console.log(Object.values(template.pallete))
 
   useEffect(() => {
     dispatch({ type: 'SET_COLOR', color: color })
