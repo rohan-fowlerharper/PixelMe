@@ -1,8 +1,11 @@
-import { Button, Flex } from "@chakra-ui/react";
-import Link from "next/link";
+import { Button, Flex } from "@chakra-ui/react"
+import Link from "next/link"
+import { useRouter } from 'next/router'
 import { AddIcon, StarIcon } from '@chakra-ui/icons'
 
 export default function Home() {
+  // todo: implement router hook with links - learn more how to do this too
+  const router = useRouter()
   return (
     <>
     {/* TODO: add simple navigation to new and from template pages */}
