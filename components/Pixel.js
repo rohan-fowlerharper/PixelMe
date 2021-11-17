@@ -9,6 +9,7 @@ const Pixel = ({ pixelColor, baseColor, size, id }) => {
   const [isHover, setIsHover] = useState(false)
 
   function applyColor (evt) {
+    if (evt.buttons !== 1) return
     const action = {
       type: 'SET_PIXEL_COLOR',
       id: id,
@@ -23,7 +24,7 @@ const Pixel = ({ pixelColor, baseColor, size, id }) => {
     const action = {
       type: 'SET_PIXEL_COLOR',
       id: id,
-      color: undefined
+      color: null
     }
     dispatch(action)
   }
@@ -34,6 +35,7 @@ const Pixel = ({ pixelColor, baseColor, size, id }) => {
       applyColor(evt)
     } else if (evt.buttons === 2) {
       removeColor(evt)
+      evt.preventDefault()
     }
     setIsHover(true)
   }
@@ -44,16 +46,11 @@ const Pixel = ({ pixelColor, baseColor, size, id }) => {
       width={`${size}px`}
       height={`${size}px`}
       backgroundColor={isHover ? selectedColor : pixelColor ? pixelColor : baseColor}
-      onMouseEnter={(evt) => {
-        // check if mouse1 is pressed
-        if (evt.buttons === 1) {
-          applyColor(evt)
-        } else if (evt.buttons === 2) {
-          removeColor(evt)
-        }
-        setIsHover(true)
-      }}
+      onMouseOver={handleHover}
+      onMouseDown={applyColor}
+      onContextMenu={removeColor}
       onMouseLeave={() => setIsHover(false)}
+      onDragStart={(evt) => evt.preventDefault()}
     />
   )
 }
