@@ -1,5 +1,7 @@
 import { hexToGrayscale } from "../util"
 const initialState = []
+// TODO: update this to use row and col idx instead of id
+// Question: will this make it more efficient if I have to return a non-mutated state anyway?
 
 function board (state = initialState, action) {
   switch (action.type) {
@@ -30,7 +32,7 @@ function board (state = initialState, action) {
           const baseColor = hexToGrayscale(action.template.pallete[colorSymbol])
           return {
             id: `${rowIdx}-${colIdx}`,
-            color: undefined,
+            color: null,
             baseColor
           }
         })
