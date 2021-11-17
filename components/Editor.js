@@ -17,12 +17,11 @@ const Editor = ({ template }) => {
     setColor(color.hex)
   }
 
-  const width = template.art[0].length ?? 5
-  const height = template.art.length ?? 5
+  const width = template ? template.art[0].length : 30
+  const height = template ? template.art.length : 30
 
   return (
     <Flex >
-      {/* TODO: set default colors from template*/}
       {template 
       ? <CirclePicker color={color} onChangeComplete={handleChangeComplete} height='500' colors={Object.values(template.pallete)} />
       : <SwatchesPicker color={color} onChangeComplete={handleChangeComplete} height='500' />}
