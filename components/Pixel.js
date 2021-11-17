@@ -2,7 +2,7 @@ import { Box } from '@chakra-ui/react'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-const Pixel = ({ pixelColor, size, id }) => {
+const Pixel = ({ pixelColor, baseColor, size, id }) => {
   const dispatch = useDispatch()
   const selectedColor = useSelector(state => state.selectedColor)
   
@@ -18,12 +18,12 @@ const Pixel = ({ pixelColor, size, id }) => {
     setIsHover(false)
   }
 
-  function applyWhite (evt) {
+  function removeColor (evt) {
     evt.preventDefault()
     const action = {
       type: 'SET_PIXEL_COLOR',
       id: id,
-      color: 'white'
+      color: undefined
     }
     dispatch(action)
   }
@@ -33,11 +33,11 @@ const Pixel = ({ pixelColor, size, id }) => {
       className="pixel"
       width={`${size}px`}
       height={`${size}px`}
-      backgroundColor={isHover ? selectedColor : pixelColor}
+      backgroundColor={isHover ? selectedColor : pixelColor ? pixelColor : baseColor}
       onMouseEnter={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
       onClick={applyColor}
-      onContextMenu={applyWhite}
+      onContextMenu={removeColor}
     />
   )
 }

@@ -1,3 +1,4 @@
+import { hexToGrayscale } from "../util"
 const initialState = []
 
 function board (state = initialState, action) {
@@ -24,7 +25,16 @@ function board (state = initialState, action) {
         })
       })
     case 'CREATE_BOARD_FROM_TEMPLATE':
-    // TODO {existingBoard, width, height}
+      return action.template.art.map((row, rowIdx) => {
+        return row.split('').map((colorSymbol, colIdx) => {
+          const baseColor = hexToGrayscale(action.template.pallete[colorSymbol])
+          return {
+            id: `${rowIdx}-${colIdx}`,
+            color: undefined,
+            baseColor
+          }
+        })
+      })
     default:
       return state
   }
