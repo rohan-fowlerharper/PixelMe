@@ -6,15 +6,14 @@ const initialState = []
 function board (state = initialState, action) {
   switch (action.type) {
     case 'SET_PIXEL_COLOR':
-      return state.map(row => {
-        return row.map(pixel => {
-          if (pixel.id === action.id) {
-            return {
-              ...pixel,
-              color: action.color
-            }
+      return state.map((row, rowIdx) => {
+        if (action.row !== rowIdx) return row
+        return row.map((pixel, colIdx) => {
+          if (action.col !== colIdx) return pixel
+          return {
+            ...pixel,
+            color: action.color
           }
-          return pixel
         })
       })
     case 'CREATE_EMPTY_BOARD':
@@ -22,7 +21,10 @@ function board (state = initialState, action) {
         return Array(action.width).fill().map((_, colIdx) => {
           return {
             id: `${rowIdx}-${colIdx}`,
-            color: action.initialColor
+            color: action.initialColor,
+            baseColor: '#FFFFFF',
+            row: rowIdx,
+            col: colIdx
           }
         })
       })
@@ -33,7 +35,9 @@ function board (state = initialState, action) {
           return {
             id: `${rowIdx}-${colIdx}`,
             color: null,
-            baseColor
+            baseColor,
+            col: colIdx,
+            row: rowIdx
           }
         })
       })
@@ -43,3 +47,5 @@ function board (state = initialState, action) {
 }
 
 export default board
+
+
