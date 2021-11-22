@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import ThemeToggle from './ThemeToggle'
 import {
   Box,
   Flex,
@@ -68,6 +69,7 @@ export default function WithAction() {
               leftIcon={<AddIcon />}>
               New
             </Button>
+            <ThemeToggle />
             <Menu>
               <MenuButton
                 as={Button}
