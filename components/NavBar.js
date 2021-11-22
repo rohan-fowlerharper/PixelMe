@@ -1,4 +1,3 @@
-import { ReactNode } from 'react';
 import ThemeToggle from './ThemeToggle'
 import {
   Box,
@@ -16,27 +15,27 @@ import {
   useDisclosure,
   useColorModeValue,
   Stack,
-} from '@chakra-ui/react';
-import { HamburgerIcon, CloseIcon, AddIcon } from '@chakra-ui/icons';
+} from '@chakra-ui/react'
+import { HamburgerIcon, CloseIcon, AddIcon } from '@chakra-ui/icons'
 
-const Links = ['My Drawings', 'Explore'];
+const Links = ['My Drawings', 'Explore']
 
-const NavLink = ({ children }) => (
+const NavLink = ({ children, href }) => (
   <Link
     px={2}
     py={1}
     rounded={'md'}
     _hover={{
       textDecoration: 'none',
-      bg: useColorModeValue('gray.200', 'gray.700'),
+      bg: useColorModeValue('gray.200', 'gray.700')
     }}
-    href={'#'}>
+    href={href}>
     {children}
   </Link>
 );
 
 export default function WithAction() {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <>
@@ -50,13 +49,13 @@ export default function WithAction() {
             onClick={isOpen ? onClose : onOpen}
           />
           <HStack spacing={8} alignItems={'center'}>
-            <Box fontWeight={'bold'}>PIXELME 🖌️</Box>
+            <NavLink href={'/'}><Box fontWeight={'bold'} padding={2}>PIXELME 🖌️</Box></NavLink>
             <HStack
               as={'nav'}
               spacing={4}
               display={{ base: 'none', md: 'flex' }}>
               {Links.map((link) => (
-                <NavLink key={link}>{link}</NavLink>
+                <NavLink key={link} href={link.toLowerCase().replace(/ /g, "-")}>{link}</NavLink>
               ))}
             </HStack>
           </HStack>
@@ -71,6 +70,7 @@ export default function WithAction() {
             </Button>
             <ThemeToggle />
             <Menu>
+              {/* TODO: get avatar and info from user */}
               <MenuButton
                 as={Button}
                 rounded={'full'}
@@ -85,10 +85,12 @@ export default function WithAction() {
                 />
               </MenuButton>
               <MenuList>
+                {/* TODO: add profile options and profile page */}
                 <MenuItem>Link 1</MenuItem>
                 <MenuItem>Link 2</MenuItem>
                 <MenuDivider />
-                <MenuItem>Link 3</MenuItem>
+                {/* TODO: Conditional render here */}
+                <MenuItem>Sign Out</MenuItem>
               </MenuList>
             </Menu>
           </Flex>
@@ -98,7 +100,7 @@ export default function WithAction() {
           <Box pb={4} display={{ md: 'none' }}>
             <Stack as={'nav'} spacing={4}>
               {Links.map((link) => (
-                <NavLink key={link}>{link}</NavLink>
+                <NavLink key={link} href={link.toLowerCase().replace(/ /g, "-")}>{link}</NavLink>
               ))}
             </Stack>
           </Box>

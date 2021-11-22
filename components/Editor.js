@@ -26,11 +26,25 @@ const Editor = ({ template }) => {
   return (
     <Flex >
       {template 
-      ? <CirclePicker color={color} onChangeComplete={handleChangeComplete} height='500' colors={Object.values(template.pallete)} />
-      : <SwatchesPicker color={color} onChangeComplete={handleChangeComplete} height='500' />}
+        ? <CirclePicker 
+            color={color} 
+            onChangeComplete={handleChangeComplete} 
+            height='500' 
+            colors={Object.values(template.pallete)} 
+          />
+        : <SwatchesPicker 
+            color={color} 
+            onChangeComplete={handleChangeComplete} 
+            height='500' 
+          />}
       <Spacer />
       <VStack>
-        <DrawingBoard currentColor={color} width={width} height={height} template={template} />
+        <DrawingBoard 
+          currentColor={color} 
+          width={width}
+          height={height}
+          template={template} 
+        />
         <Flex>
           {template && 
           <Button 
