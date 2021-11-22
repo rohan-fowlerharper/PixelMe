@@ -19,26 +19,22 @@ const DrawingBoard = ({ width, height, template }) => {
 
   return (
     <SimpleGrid
-      bg='gray.50'
+      bg='gray.100'
       columns={width}
       spacingX="1px"
       spacingY="1px"
       height={height*(pixelSize + 1) + 1}
       p="1px"
+      onContextMenu={(evt) => evt.preventDefault()}
     >
       {board.map((row, rowIdx) => (
-          row.map((pixel, colIdx) => {
-            return (
+          row.map((pixel, colIdx) => (
             <Pixel
               key={pixel.id}
-              id={pixel.id}
-              baseColor={pixel.baseColor}
-              pixelColor={pixel.color}
+              pixel={pixel}
               size={pixelSize}
-              row={rowIdx}
-              col={colIdx}
             />
-          )})
+          ))
       ))}
     </SimpleGrid>
   )
