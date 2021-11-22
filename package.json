@@ -8,7 +8,7 @@
     "lint": "next lint"
   },
   "eslintConfig": {
-    "extends": "esling-config-next"
+    "extends": "eslint-config-next"
   },
   "dependencies": {
     "@chakra-ui/icons": "^1.1.1",
