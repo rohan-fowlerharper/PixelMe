@@ -18,7 +18,6 @@ import store from '../redux/store'
 // }
 
 function MyApp ({ Component, pageProps }) {
-  console.log(pageProps)
   return (
     <Provider store={store}>
       <ChakraProvider theme={theme}>
