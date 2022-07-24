@@ -1,10 +1,8 @@
-import { 
-  ChakraProvider,
-  Container
-} from '@chakra-ui/react'
+import { ChakraProvider, Container } from '@chakra-ui/react'
 import NavBar from '../components/NavBar'
 import { Provider } from 'react-redux'
 import store from '../redux/store'
+import type { AppProps } from 'next/app'
 // TODO: add Auth0
 // export const getServerSideProps = async (ctx) => {
 //   const session = await auth0.getSession(ctx)
@@ -15,7 +13,7 @@ import store from '../redux/store'
 //   }
 // }
 
-function MyApp ({ Component, pageProps }) {
+function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Provider store={store}>
       <ChakraProvider>

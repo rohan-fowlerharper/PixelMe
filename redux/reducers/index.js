@@ -1,14 +1,14 @@
 // create root reducer and import other reducers
-import { combineReducers } from 'redux'
+import { combineReducers } from '@reduxjs/toolkit'
 
-import board from './board'
-import selectedColor from './selectedColor'
+import board from './boardSlice'
+import selectedColor from './selectedColorSlice'
 import showTemplate from './showTemplate'
 
 const rootReducer = combineReducers({
   board,
   selectedColor,
-  showTemplate
+  showTemplate,
 })
 
 export default rootReducer
