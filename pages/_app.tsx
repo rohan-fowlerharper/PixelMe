@@ -3,15 +3,8 @@ import NavBar from '../components/NavBar'
 import { Provider } from 'react-redux'
 import store from '../redux/store'
 import type { AppProps } from 'next/app'
-// TODO: add Auth0
-// export const getServerSideProps = async (ctx) => {
-//   const session = await auth0.getSession(ctx)
-//   return {
-//     props: {
-//       session
-//     }
-//   }
-// }
+
+// TODO: add NextAuth
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
