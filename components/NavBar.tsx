@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import React, { ReactNode } from 'react'
 import ThemeToggle from './ThemeToggle'
 import {
   Box,
@@ -16,12 +16,12 @@ import {
   useDisclosure,
   useColorModeValue,
   Stack,
-} from '@chakra-ui/react';
-import { HamburgerIcon, CloseIcon, AddIcon } from '@chakra-ui/icons';
+} from '@chakra-ui/react'
+import { HamburgerIcon, CloseIcon, AddIcon } from '@chakra-ui/icons'
 
-const Links = ['My Drawings', 'Explore'];
+const Links = ['My Drawings', 'Explore']
 
-const NavLink = ({ children }) => (
+const NavLink = ({ children }: { children?: React.ReactNode }) => (
   <Link
     px={2}
     py={1}
@@ -30,13 +30,14 @@ const NavLink = ({ children }) => (
       textDecoration: 'none',
       bg: useColorModeValue('gray.200', 'gray.700'),
     }}
-    href={'#'}>
+    href={'#'}
+  >
     {children}
   </Link>
-);
+)
 
 export default function WithAction() {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <>
@@ -54,7 +55,8 @@ export default function WithAction() {
             <HStack
               as={'nav'}
               spacing={4}
-              display={{ base: 'none', md: 'flex' }}>
+              display={{ base: 'none', md: 'flex' }}
+            >
               {Links.map((link) => (
                 <NavLink key={link}>{link}</NavLink>
               ))}
@@ -66,7 +68,8 @@ export default function WithAction() {
               colorScheme={'pink'}
               size={'sm'}
               mr={4}
-              leftIcon={<AddIcon />}>
+              leftIcon={<AddIcon />}
+            >
               New
             </Button>
             <ThemeToggle />
@@ -76,7 +79,8 @@ export default function WithAction() {
                 rounded={'full'}
                 variant={'link'}
                 cursor={'pointer'}
-                minW={0}>
+                minW={0}
+              >
                 <Avatar
                   size={'sm'}
                   src={
@@ -105,5 +109,5 @@ export default function WithAction() {
         ) : null}
       </Box>
     </>
-  );
+  )
 }
