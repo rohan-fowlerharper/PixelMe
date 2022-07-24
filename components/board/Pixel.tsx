@@ -1,7 +1,7 @@
 import React, { ReactElement, useMemo, useState } from 'react'
 import { useAppSelector, useAppDispatch } from '../../redux/store'
-import { draw, clear, setPixelColor } from '../../redux/reducers/boardSlice'
-import { Box, ChakraProps, Heading } from '@chakra-ui/react'
+import { draw, clear } from '../../redux/reducers/boardSlice'
+import { Box, ChakraProps } from '@chakra-ui/react'
 
 type PixelProps = {
   size: number

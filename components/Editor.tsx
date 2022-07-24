@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import DrawingBoard from './DrawingBoard'
 import { SwatchesPicker, CirclePicker } from 'react-color'
 import { Flex, Spacer, VStack, Button } from '@chakra-ui/react'
