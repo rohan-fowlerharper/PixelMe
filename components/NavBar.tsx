@@ -3,7 +3,7 @@ import ThemeToggle from './ThemeToggle'
 import { Box, Flex, IconButton, useColorModeValue } from '@chakra-ui/react'
 import Link from 'next/link'
 import { useColorScheme } from '../hooks/useColorScheme'
-import { LogoGithub } from '@carbon/icons-react'
+import { FaGithub } from 'react-icons/fa'
 
 export default function Navigation() {
   const colorScheme = useColorScheme() || 'gray'
@@ -37,9 +37,10 @@ export default function Navigation() {
             <IconButton
               as={Link}
               aria-label="Link to Pixelme's Github"
+              aria-hidden='false'
               colorScheme={colorScheme}
               href='https://github.com/rohan-fowlerharper/pixelme'
-              icon={<LogoGithub />}
+              icon={<FaGithub />}
             />
             <ThemeToggle />
           </Flex>
