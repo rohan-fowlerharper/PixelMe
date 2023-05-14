@@ -1,20 +1,22 @@
 import { Button, Flex } from '@chakra-ui/react'
 import Link from 'next/link'
 import { AddIcon, StarIcon } from '@chakra-ui/icons'
+import { useColorScheme } from '../hooks/useColorScheme'
 
 export default function Home() {
+  const colorScheme = useColorScheme()
   return (
     <Flex justify='space-evenly'>
-      <Button colorScheme='pink' leftIcon={<AddIcon />}>
-        <Link href='/new'>
-          <a>New</a>
-        </Link>
-      </Button>
-      <Button colorScheme='pink' leftIcon={<StarIcon />}>
-        <Link href='/from'>
-          <a>From Template</a>
-        </Link>
-      </Button>
+      <Link href='/new' passHref>
+        <Button as='a' colorScheme={colorScheme} leftIcon={<AddIcon />}>
+          New Drawing
+        </Button>
+      </Link>
+      <Link href='/from-template' passHref>
+        <Button as='a' colorScheme={colorScheme} leftIcon={<StarIcon />}>
+          From A Template
+        </Button>
+      </Link>
     </Flex>
   )
 }

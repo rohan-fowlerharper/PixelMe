@@ -9,14 +9,15 @@ const DrawingBoard = ({
   width: number
   height: number
 }): React.ReactElement => {
-  const pixelSize = 16 // TODO: make this a prop based on the size of the canvas
+  const PIXEL_SIZE = 16 // TODO: make this a prop based on the size of the canvas
+
   return (
     <SimpleGrid
       borderLeft='1px solid #EEEEEE'
       borderTop='1px solid #EEEEEE'
       columns={width}
-      width={width * pixelSize}
-      height={height * pixelSize}
+      width={width * PIXEL_SIZE}
+      height={height * PIXEL_SIZE}
       onContextMenu={(evt) => evt.preventDefault()}
     >
       {Array.from({ length: height })
@@ -29,7 +30,7 @@ const DrawingBoard = ({
                 key={`${row}-${col}`}
                 row={row}
                 col={col}
-                size={pixelSize}
+                size={PIXEL_SIZE}
                 borderRight='1px solid #EEEEEE'
                 borderBottom='1px solid #EEEEEE'
               />
