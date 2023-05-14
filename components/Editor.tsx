@@ -1,21 +1,25 @@
 import { useState, useEffect } from 'react'
-import DrawingBoard from './DrawingBoard'
 import { SwatchesPicker, CirclePicker } from 'react-color'
 import { Flex, Spacer, VStack, Button } from '@chakra-ui/react'
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
-import { useAppDispatch, useAppSelector } from '../redux/store'
-import { setSelectedColor } from '../redux/reducers/selectedColorSlice'
 
+import DrawingBoard from './DrawingBoard'
+import { setSelectedColor } from '../redux/reducers/selectedColorSlice'
+import { useAppDispatch, useAppSelector } from '../redux/store'
 import {
   createBoardFromTemplate,
   createEmptyBoard,
-  HexString,
 } from '../redux/reducers/boardSlice'
+import { toggleTemplate } from '../redux/reducers/showTemplate'
+import { useColorScheme } from '../hooks/useColorScheme'
+import { HexString } from '../utils/colors'
+import { Template } from '../types/template'
 
-const Editor = ({ template }: { template?: any }) => {
+const Editor = ({ template }: { template?: Template }) => {
   const selectedColor = useAppSelector((state) => state.selectedColor)
   const dispatch = useAppDispatch()
   const showTemplate = useAppSelector((state) => state.showTemplate)
+  const colorScheme = useColorScheme()
   const [hasRendered, setHasRendered] = useState(false)
 
   function handleChangeComplete(color: { hex: string }) {
@@ -54,8 +58,9 @@ const Editor = ({ template }: { template?: any }) => {
         <Flex>
           {template && (
             <Button
-              onClick={() => dispatch({ type: 'TOGGLE_TEMPLATE' })}
+              onClick={() => dispatch(toggleTemplate())}
               leftIcon={showTemplate ? <ViewIcon /> : <ViewOffIcon />}
+              colorScheme={colorScheme}
             >
               Toggle Template
             </Button>
