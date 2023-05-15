@@ -1,34 +1,34 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# PixelMe 🎨🖌️
 
-## Getting Started
+PixelMe is a small web application that allows users to draw pixel art, but also complete a paint-by-numbers Nyan Cat image. The application is built using Next, React, and Redux. It's running in deployment and can be found here [pixels.roh.codes](https://pixels.roh.codes)
 
-First, run the development server:
+## Loose list of features:
+
+- 🖱️ Left click to draw/Right click to erase
+- 🎨 Colour picker (based on the colour palette of the template, if available)
+- 🌈 Selected colour influences app theme
+- 👁️‍🗨️ Toggle template visibility (if available)
+
+## To run the repository:
+
+### Install and run it locally
 
 ```bash
+git clone git@github.com:rohan-fowlerharper/pixelme.git
+cd pixelme
+
+npm install
 npm run dev
-# or
-yarn dev
+
+# Development server will run at http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Or use Docker
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+  
+```bash
+docker pull rohanfh/pixels:latest
+docker run -p 3000:3000 rohanfh/pixels:latest
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+# Production build will run at http://localhost:3000
+```
