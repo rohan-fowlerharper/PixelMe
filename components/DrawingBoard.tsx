@@ -40,6 +40,4 @@ const DrawingBoard = ({
   )
 }
 
-// width: Math.max(...nyanCat.art.map(line => line.length)),
-// height: nyanCat.art.length
 export default DrawingBoard

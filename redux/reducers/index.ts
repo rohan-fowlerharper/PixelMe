@@ -1,4 +1,3 @@
-// create root reducer and import other reducers
 import { combineReducers } from '@reduxjs/toolkit'
 
 import board from './boardSlice'
