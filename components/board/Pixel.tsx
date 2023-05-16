@@ -24,8 +24,13 @@ const Pixel = ({
 
   function handleDraw(evt: React.MouseEvent<HTMLDivElement, MouseEvent>) {
     evt.preventDefault()
-    if (evt.buttons === 1) dispatch(draw({ row, col, color: selectedColor }))
-    if (evt.buttons === 2) dispatch(clear({ row, col }))
+    evt.stopPropagation()
+
+    if (evt.buttons === 1 && color !== selectedColor) {
+      dispatch(draw({ row, col, color: selectedColor }))
+    } else if (evt.buttons === 2 && color !== null) {
+      dispatch(clear({ row, col }))
+    }
   }
 
   const colorToShow = useMemo(() => {
