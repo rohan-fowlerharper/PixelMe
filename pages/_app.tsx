@@ -3,6 +3,7 @@ import Navigation from '../components/NavBar'
 import { Provider } from 'react-redux'
 import store from '../redux/store'
 import { Inter } from 'next/font/google'
+import { Analytics } from '@vercel/analytics/react'
 import type { AppProps } from 'next/app'
 
 const inter = Inter({
@@ -11,16 +12,19 @@ const inter = Inter({
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <main className={inter.className}>
-      <Provider store={store}>
-        <ChakraProvider>
-          <Navigation />
-          <Container maxW='5xl' mt='10'>
-            <Component {...pageProps} />
-          </Container>
-        </ChakraProvider>
-      </Provider>
-    </main>
+    <>
+      <main className={inter.className}>
+        <Provider store={store}>
+          <ChakraProvider>
+            <Navigation />
+            <Container maxW='5xl' mt='10'>
+              <Component {...pageProps} />
+            </Container>
+          </ChakraProvider>
+        </Provider>
+      </main>
+      <Analytics />
+    </>
   )
 }
 
