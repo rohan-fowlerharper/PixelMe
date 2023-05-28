@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { SwatchesPicker, CirclePicker } from 'react-color'
-import { Flex, Spacer, VStack, Button } from '@chakra-ui/react'
+import { Flex, Spacer, VStack, Tooltip, IconButton } from '@chakra-ui/react'
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
+import { FaDownload, FaEraser } from 'react-icons/fa'
 
 import DrawingBoard from './DrawingBoard'
 import { setSelectedColor } from '../redux/reducers/selectedColorSlice'
@@ -14,17 +15,19 @@ import { toggleTemplate } from '../redux/reducers/showTemplate'
 import { useColorScheme } from '../hooks/useColorScheme'
 import { HexString } from '../utils/colors'
 import { Template } from '../types/template'
+import html2canvas from 'html2canvas'
 
-const Editor = ({ template }: { template?: Template }) => {
+interface Props {
+  template?: Template
+}
+
+const Editor = ({ template }: Props) => {
   const selectedColor = useAppSelector((state) => state.selectedColor)
   const dispatch = useAppDispatch()
   const showTemplate = useAppSelector((state) => state.showTemplate)
   const colorScheme = useColorScheme()
   const [hasRendered, setHasRendered] = useState(false)
-
-  function handleChangeComplete(color: { hex: string }) {
-    dispatch(setSelectedColor(color.hex as HexString))
-  }
+  const boardRef = useRef<HTMLDivElement>(null)
 
   const width = template ? template.art[0].length : 30
   const height = template ? template.art.length : 30
@@ -37,6 +40,35 @@ const Editor = ({ template }: { template?: Template }) => {
       setHasRendered(true)
     }
   }, [dispatch, height, width, template, hasRendered])
+
+  function handleChangeComplete(color: { hex: string }) {
+    dispatch(setSelectedColor(color.hex as HexString))
+  }
+
+  async function handleDownloadClick() {
+    const container = boardRef.current
+    if (!container) {
+      console.error('Failed to get board container')
+      return
+    }
+
+    const canvas = await html2canvas(container)
+
+    canvas.toBlob((blob) => {
+      if (!blob) {
+        console.error('Failed to convert canvas to blob')
+        return
+      }
+      const url = URL.createObjectURL(blob)
+      const link = document.createElement('a')
+
+      link.href = url
+      link.download = 'pixel-art.png'
+      link.click()
+
+      URL.revokeObjectURL(url)
+    })
+  }
 
   return (
     <Flex>
@@ -54,22 +86,46 @@ const Editor = ({ template }: { template?: Template }) => {
       )}
       <Spacer />
       <VStack>
-        {hasRendered && <DrawingBoard width={width} height={height} />}
-        <Flex>
+        {hasRendered && (
+          <DrawingBoard ref={boardRef} width={width} height={height} />
+        )}
+        <Flex gap={2} justifyContent='flex-end' w='full'>
           {template && (
-            <Button
-              onClick={() => dispatch(toggleTemplate())}
-              leftIcon={showTemplate ? <ViewIcon /> : <ViewOffIcon />}
+            <Tooltip label='Toggle Template'>
+              <IconButton
+                aria-label='Toggle Template'
+                icon={showTemplate ? <ViewIcon /> : <ViewOffIcon />}
+                onClick={() => dispatch(toggleTemplate())}
+                colorScheme={colorScheme}
+              />
+            </Tooltip>
+          )}
+          <Tooltip label='Clear Drawing'>
+            <IconButton
+              aria-label='Clear Drawing'
+              icon={<FaEraser />}
+              onClick={() => {
+                if (template) {
+                  dispatch(createBoardFromTemplate({ template }))
+                } else {
+                  dispatch(createEmptyBoard({ width, height }))
+                }
+              }}
               colorScheme={colorScheme}
             >
-              Toggle Template
-            </Button>
-          )}
+              Clear
+            </IconButton>
+          </Tooltip>
+          <Tooltip label='Download Drawing as PNG'>
+            <IconButton
+              aria-label='Download Drawing as PNG'
+              icon={<FaDownload />}
+              onClick={handleDownloadClick}
+              colorScheme={colorScheme}
+            />
+          </Tooltip>
         </Flex>
       </VStack>
-
-      {/* TODO: add export to png and export to template buttons */}
-      <Spacer />
     </Flex>
   )
 }
