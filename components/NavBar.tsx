@@ -32,7 +32,7 @@ export default function Navigation() {
             fontWeight='extrabold'
             color={`${colorScheme}.${textDarkness}`}
           >
-            PIXELME 🖌️
+            PIXELS 🖌️
           </Box>
           <Flex gap='2'>
             <IconButton
