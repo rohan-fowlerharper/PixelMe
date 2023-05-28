@@ -8,6 +8,7 @@ Pixels is a small web application that allows users to draw pixel art, but also 
 - 🎨 Colour picker (based on the colour palette of the template, if available)
 - 🌈 Selected colour influences app theme
 - 👁️‍🗨️ Toggle template visibility (if available)
+- 🖼️ Download drawings as a PNG file
 
 ## To run the repository:
 
