@@ -9,8 +9,7 @@ const inter = Inter({
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const colorScheme = useColorScheme()
-  // TODO: add values darker than 900
-  const bgDarkness = useColorModeValue('50', '900')
+  const bgDarkness = useColorModeValue('50', '1000')
 
   return (
     <Box
