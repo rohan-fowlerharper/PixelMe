@@ -13,6 +13,7 @@ export default function Navigation() {
   return (
     <>
       <Flex
+        as='nav'
         bg={`${colorScheme}.${bgDarkness}`}
         px={4}
         justifyContent='center'
@@ -35,7 +36,7 @@ export default function Navigation() {
           </Box>
           <Flex gap='2'>
             <IconButton
-              as={Link}
+              as='a'
               aria-label="Link to Pixelme's Github"
               aria-hidden='false'
               colorScheme={colorScheme}

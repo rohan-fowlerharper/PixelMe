@@ -5,6 +5,7 @@ import { useColorScheme } from '../hooks/useColorScheme'
 
 export default function Home() {
   const colorScheme = useColorScheme()
+
   return (
     <Flex justify='space-evenly'>
       <Button
