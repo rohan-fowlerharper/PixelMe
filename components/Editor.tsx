@@ -3,7 +3,6 @@ import { SwatchesPicker, CirclePicker } from 'react-color'
 import { Flex, Spacer, VStack, Tooltip, IconButton } from '@chakra-ui/react'
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 import { FaDownload } from 'react-icons/fa'
-import { FiRotateCcw } from 'react-icons/fi'
 
 import DrawingBoard from './DrawingBoard'
 import { setSelectedColor } from '../redux/reducers/selectedColorSlice'
@@ -17,6 +16,7 @@ import { useColorScheme } from '../hooks/useColorScheme'
 import { HexString } from '../utils/colors'
 import { Template } from '../types/template'
 import html2canvas from 'html2canvas'
+import ResetButton from './ResetButton'
 
 interface Props {
   template?: Template
@@ -30,22 +30,32 @@ const Editor = ({ template }: Props) => {
   const [hasRendered, setHasRendered] = useState(false)
   const boardRef = useRef<HTMLDivElement>(null)
 
-  const width = template ? template.art[0].length : 32
-  const height = template ? template.art.length : 32
+  const hasTemplate = !!template
+
+  const width = hasTemplate ? template.art[0].length : 32
+  const height = hasTemplate ? template.art.length : 32
 
   useEffect(() => {
     if (!hasRendered) {
-      const action = template
+      const action = hasTemplate
         ? createBoardFromTemplate({ template })
         : createEmptyBoard({ width, height })
 
       dispatch(action)
       setHasRendered(true)
     }
-  }, [dispatch, height, width, template, hasRendered])
+  }, [dispatch, height, width, template, hasRendered, hasTemplate])
 
   function handleChangeComplete(color: { hex: string }) {
     dispatch(setSelectedColor(color.hex as HexString))
+  }
+
+  function handleResetClick() {
+    if (hasTemplate) {
+      dispatch(createBoardFromTemplate({ template }))
+    } else {
+      dispatch(createEmptyBoard({ width, height }))
+    }
   }
 
   async function handleDownloadClick() {
@@ -103,22 +113,9 @@ const Editor = ({ template }: Props) => {
               />
             </Tooltip>
           )}
-          <Tooltip label='Clear Drawing'>
-            <IconButton
-              aria-label='Clear Drawing'
-              icon={<FiRotateCcw />}
-              onClick={() => {
-                if (template) {
-                  dispatch(createBoardFromTemplate({ template }))
-                } else {
-                  dispatch(createEmptyBoard({ width, height }))
-                }
-              }}
-              colorScheme={colorScheme}
-            >
-              Clear
-            </IconButton>
-          </Tooltip>
+
+          <ResetButton onReset={handleResetClick} />
+
           <Tooltip label='Download Drawing as PNG'>
             <IconButton
               aria-label='Download Drawing as PNG'
