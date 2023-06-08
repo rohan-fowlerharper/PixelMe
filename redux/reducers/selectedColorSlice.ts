@@ -1,7 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit'
-import { PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
 
-import type { HexString } from '../../utils/colors'
+import { type HexString } from '../../utils/colors'
 
 export const colorSlice = createSlice({
   name: 'selectedColor',

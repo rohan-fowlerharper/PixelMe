@@ -3,8 +3,14 @@ import { SwatchesPicker, CirclePicker } from 'react-color'
 import { Flex, Spacer, VStack, Tooltip, IconButton } from '@chakra-ui/react'
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 import { FaDownload } from 'react-icons/fa'
+import html2canvas from 'html2canvas'
+
+import { type HexString } from '../utils/colors'
+import { type Template } from '../types/template'
 
 import DrawingBoard from './DrawingBoard'
+import ResetButton from './ResetButton'
+
 import { setSelectedColor } from '../redux/reducers/selectedColorSlice'
 import { useAppDispatch, useAppSelector } from '../redux/store'
 import {
@@ -13,10 +19,6 @@ import {
 } from '../redux/reducers/boardSlice'
 import { toggleTemplate } from '../redux/reducers/showTemplate'
 import { useColorScheme } from '../hooks/useColorScheme'
-import { HexString } from '../utils/colors'
-import { Template } from '../types/template'
-import html2canvas from 'html2canvas'
-import ResetButton from './ResetButton'
 
 interface Props {
   template?: Template

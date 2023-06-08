@@ -1,14 +1,10 @@
-import { hexToGrayscale } from '../../utils/colors'
-import { createSlice } from '@reduxjs/toolkit'
-import type { PayloadAction } from '@reduxjs/toolkit'
-import { HexString } from '../../utils/colors'
-import { Template } from '../../types/template'
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
+import { hexToGrayscale, type HexString } from '../../utils/colors'
+import { type Template } from '../../types/template'
 
-type row = number
-type col = number
 type Pixel = {
-  row: row
-  col: col
+  row: number
+  col: number
   color: HexString | null
   baseColor: HexString
 }
