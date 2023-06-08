@@ -1,6 +1,12 @@
 import React from 'react'
 import ThemeToggle from './ThemeToggle'
-import { Box, Flex, IconButton, useColorModeValue } from '@chakra-ui/react'
+import {
+  Box,
+  Flex,
+  IconButton,
+  Tooltip,
+  useColorModeValue,
+} from '@chakra-ui/react'
 import Link from 'next/link'
 import { useColorScheme } from '../hooks/useColorScheme'
 import { FaGithub } from 'react-icons/fa'
@@ -35,14 +41,16 @@ export default function Navigation() {
             PIXELS 🖌️
           </Box>
           <Flex gap='2'>
-            <IconButton
-              as='a'
-              aria-label="Link to Pixelme's Github"
-              aria-hidden='false'
-              colorScheme={colorScheme}
-              href='https://github.com/rohan-fowlerharper/pixelme'
-              icon={<FaGithub />}
-            />
+            <Tooltip label='GitHub repository'>
+              <IconButton
+                as='a'
+                aria-label='Github repository'
+                aria-hidden='false'
+                colorScheme={colorScheme}
+                href='https://github.com/rohan-fowlerharper/pixelme'
+                icon={<FaGithub />}
+              />
+            </Tooltip>
             <ThemeToggle />
           </Flex>
         </Flex>

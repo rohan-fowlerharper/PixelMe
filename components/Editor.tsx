@@ -116,9 +116,9 @@ const Editor = ({ template }: Props) => {
 
           <ResetButton onReset={handleResetClick} />
 
-          <Tooltip label='Download Drawing as PNG'>
+          <Tooltip label='Download drawing as PNG'>
             <IconButton
-              aria-label='Download Drawing as PNG'
+              aria-label='Download drawing as PNG'
               icon={<FaDownload />}
               onClick={handleDownloadClick}
               colorScheme={colorScheme}
