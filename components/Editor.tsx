@@ -2,7 +2,8 @@ import { useState, useEffect, useRef } from 'react'
 import { SwatchesPicker, CirclePicker } from 'react-color'
 import { Flex, Spacer, VStack, Tooltip, IconButton } from '@chakra-ui/react'
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
-import { FaDownload, FaEraser } from 'react-icons/fa'
+import { FaDownload } from 'react-icons/fa'
+import { FiRotateCcw } from 'react-icons/fi'
 
 import DrawingBoard from './DrawingBoard'
 import { setSelectedColor } from '../redux/reducers/selectedColorSlice'
@@ -34,9 +35,11 @@ const Editor = ({ template }: Props) => {
 
   useEffect(() => {
     if (!hasRendered) {
-      template
-        ? dispatch(createBoardFromTemplate({ template }))
-        : dispatch(createEmptyBoard({ width, height }))
+      const action = template
+        ? createBoardFromTemplate({ template })
+        : createEmptyBoard({ width, height })
+
+      dispatch(action)
       setHasRendered(true)
     }
   }, [dispatch, height, width, template, hasRendered])
@@ -103,7 +106,7 @@ const Editor = ({ template }: Props) => {
           <Tooltip label='Clear Drawing'>
             <IconButton
               aria-label='Clear Drawing'
-              icon={<FaEraser />}
+              icon={<FiRotateCcw />}
               onClick={() => {
                 if (template) {
                   dispatch(createBoardFromTemplate({ template }))
