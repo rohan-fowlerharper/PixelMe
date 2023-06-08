@@ -65,7 +65,7 @@ export function colorDistance(color1: RGB, color2: RGB) {
 export function cieDE2000(lab1: Lab, lab2: Lab) {
   const kL = 1
   const kC = 1
-  const kH = 1.5
+  const kH = 1
 
   const deltaL = lab2.L - lab1.L
   const C1 = Math.sqrt(lab1.a * lab1.a + lab1.b * lab1.b)
@@ -78,13 +78,6 @@ export function cieDE2000(lab1: Lab, lab2: Lab) {
   const SL = 1
   const SC = 1 + 0.045 * C1
   const SH = 1 + 0.015 * C1
-
-  const deltaTheta = Math.acos((lab1.a * lab2.a + lab1.b * lab2.b) / (C1 * C2))
-
-  const H =
-    Math.abs(deltaa) + Math.abs(deltab) < deltaH
-      ? deltaTheta
-      : 2 * Math.PI - deltaTheta
 
   const deltaE = Math.sqrt(
     (deltaL / (kL * SL)) ** 2 +
