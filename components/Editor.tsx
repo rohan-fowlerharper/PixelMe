@@ -29,8 +29,8 @@ const Editor = ({ template }: Props) => {
   const [hasRendered, setHasRendered] = useState(false)
   const boardRef = useRef<HTMLDivElement>(null)
 
-  const width = template ? template.art[0].length : 30
-  const height = template ? template.art.length : 30
+  const width = template ? template.art[0].length : 32
+  const height = template ? template.art.length : 32
 
   useEffect(() => {
     if (!hasRendered) {
