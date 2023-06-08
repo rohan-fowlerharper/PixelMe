@@ -43,7 +43,8 @@ export default function ResetButton({ onReset }: { onReset: () => void }) {
         <PopoverArrow />
         <PopoverCloseButton onClick={onClose} />
         <PopoverHeader>
-          Are you sure you want to reset the canvas?
+          Are you sure you want to reset the canvas? All your progress will be
+          lost.
         </PopoverHeader>
         <PopoverBody>
           <Flex justifyContent='end' gap={2}>
